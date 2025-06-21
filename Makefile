@@ -6,10 +6,10 @@ DC_FILE := docker-compose.yml
 
 install:
 	@echo "apt update and Install docker"
-	$sudo apt update
-	$sudo apt install docker.io docker-compose -y
-	$sudo systemctl enable docker
-	$sudo usermod -aG docker $USER
+	sudo apt update
+	sudo apt install docker.io docker-compose -y
+	sudo systemctl enable docker
+	sudo usermod -aG docker $(USER)
 
 
 init:
