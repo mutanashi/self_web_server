@@ -1,56 +1,111 @@
-docker-site
-===========
+# docker-site
 
 This project uses a Makefile to manage a Docker-based Nginx setup using docker-compose.
 
-REQUIREMENTS
-------------
+---
+
+## REQUIREMENTS
+
 - Linux (Ubuntu recommended)
 - Docker and Docker Compose
 - make utility installed
 
-USAGE
------
+---
 
-1. Install Docker and Docker Compose:
-   make install
-   (This runs: sudo apt update, installs docker.io & docker-compose, enables docker, and adds user to docker group)
+## USAGE
 
-2. Start the Nginx container:
-   make up
-   Equivalent to:
-     docker-compose -f docker-compose.yml up -d --build
+### 1. Install Docker and Docker Compose
 
-3. Stop the container:
-   make down
-   Equivalent to:
-     docker-compose -f docker-compose.yml down
+```bash
+make install
+```
+This runs:
+```bash
+sudo apt update
+sudo apt install docker.io docker-compose -y
+sudo systemctl enable docker
+sudo usermod -aG docker $USER
+```
 
-4. Restart the container:
-   make restart
-   (Runs make down then make up)
+### 2. Start the Nginx container
 
-5. Rebuild the container without starting:
-   make build
-   Equivalent to:
-     docker-compose -f docker-compose.yml build
+```bash
+make up
+```
+Equivalent to:
+```bash
+docker-compose -f docker-compose.yml up -d --build
+```
 
-6. View logs:
-   make logs
-   Equivalent to:
-     docker-compose -f docker-compose.yml logs -f
+### 3. Stop the container
 
-7. Clean up containers, volumes, and orphan resources:
-   make clean
-   Equivalent to:
-     docker-compose -f docker-compose.yml down -v --remove-orphans
+```bash
+make down
+```
+Equivalent to:
+```bash
+docker-compose -f docker-compose.yml down
+```
 
-8. Open shell inside the nginx container:
-   make shell
-   Equivalent to:
-     docker-compose -f docker-compose.yml exec nginx sh
+### 4. Restart the container
 
-NOTES
------
-- The Makefile uses PROJECT_NAME := docker-site and docker-compose.yml as the config file.
-- Make sure your docker-compose.yml file includes a service named "nginx" for `make shell` to work.
+```bash
+make restart
+```
+This runs:
+```bash
+make down
+make up
+```
+
+### 5. Rebuild the container without starting
+
+```bash
+make build
+```
+Equivalent to:
+```bash
+docker-compose -f docker-compose.yml build
+```
+
+### 6. View logs
+
+```bash
+make logs
+```
+Equivalent to:
+```bash
+docker-compose -f docker-compose.yml logs -f
+```
+
+### 7. Clean up containers, volumes, and orphan resources
+
+```bash
+make clean
+```
+Equivalent to:
+```bash
+docker-compose -f docker-compose.yml down -v --remove-orphans
+```
+
+### 8. Open shell inside the nginx container
+
+```bash
+make shell
+```
+Equivalent to:
+```bash
+docker-compose -f docker-compose.yml exec nginx sh
+```
+
+---
+
+## NOTES
+
+- The Makefile uses:
+  ```makefile
+  PROJECT_NAME := docker-site
+  DOCKER_COMPOSE := docker-compose
+  DC_FILE := docker-compose.yml
+  ```
+- Make sure your docker-compose.yml file includes a service named `nginx` for `make shell` to work.
