@@ -44,7 +44,7 @@ services:
       - backend
 
   # Project 2 (FastAPI + DB)
-  salary_tool:
+  Salary_tool:
     build: ./web_tools/salary
     container_name: salary_tool
     expose:
