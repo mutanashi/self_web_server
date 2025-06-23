@@ -30,30 +30,30 @@ services:
       - backend
 
   # Project 1 (FastAPI + DB)
-  Pinball:
-    build: ./web_games/Pinball
-    container_name: Pinball
+  pinball:
+    build: ./web_games/pinball
+    container_name: pinball
     expose:
       - "8000"
     env_file:
-      - ./web_games/Pinball/.env
+      - ./web_games/pinball/.env
     volumes:
-      - ./web_games/Pinball/db_data:/var/lib/postgresql/data
-      - ./web_games/Pinball/logs:/app/logs
+      - ./web_games/pinball/db_data:/var/lib/postgresql/data
+      - ./web_games/pinball/logs:/app/logs
     networks:
       - backend
 
   # Project 2 (FastAPI + DB)
-  Salary_tool:
-    build: ./web_tools/salary
+  salary_tool:
+    build: ./web_tools/salary_tool
     container_name: salary_tool
     expose:
       - "8000"
     env_file:
-      - ./web_tools/salary/.env
+      - ./web_tools/salary_tool/.env
     volumes:
-      - ./web_tools/salary/db_data:/var/lib/postgresql/data
-      - ./web_tools/salary/logs:/app/logs
+      - ./web_tools/salary_tool/db_data:/var/lib/postgresql/data
+      - ./web_tools/salary_tool/logs:/app/logs
     networks:
       - backend
 
