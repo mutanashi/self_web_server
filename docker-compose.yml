@@ -1,0 +1,95 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - fastapi1
+      - fastapi2
+    networks:
+      - backend
+
+  auth_postgres_data:
+    image: postgres:14
+    container_name: auth
+    restart: always
+    environment:
+      POSTGRES_DB: auth_db
+      POSTGRES_USER: auth_name
+      POSTGRES_PASSWORD: auth_name
+      POSTGRES_uuid: auth_uuid
+      POSTGRES_token: auth_token
+    volumes:
+      - project2_postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend
+  # Project 1
+  fastapi1:
+    build: ./project1
+    container_name: fastapi1
+    expose:
+      - "8000"
+    environment:
+      - DB_HOST=postgres1
+      - DB_NAME=project1db
+      - DB_USER=user1
+      - DB_PASS=pass1
+    depends_on:
+      - postgres1
+    networks:
+      - backend
+
+  postgres1:
+    image: postgres:14
+    container_name: postgres1
+    restart: always
+    environment:
+      POSTGRES_DB: project1db
+      POSTGRES_USER: user1
+      POSTGRES_PASSWORD: pass1
+    volumes:
+      - project1_postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  # Project 2
+  fastapi2:
+    build: ./project2
+    container_name: fastapi2
+    expose:
+      - "8000"
+    environment:
+      - DB_HOST=postgres2
+      - DB_NAME=project2db
+      - DB_USER=user2
+      - DB_PASS=pass2
+    depends_on:
+      - postgres2
+    networks:
+      - backend
+
+  postgres2:
+    image: postgres:14
+    container_name: postgres2
+    restart: always
+    environment:
+      POSTGRES_DB: project2db
+      POSTGRES_USER: user2
+      POSTGRES_PASSWORD: pass2
+    volumes:
+      - project2_postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+networks:
+  backend:
+
+volumes:
+  auth_postgres_data:
+  project1_postgres_data:
+  project2_postgres_data:
