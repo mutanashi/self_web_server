@@ -2,7 +2,7 @@ PROJECT_NAME := docker-site
 DOCKER_COMPOSE := docker-compose
 DC_FILE := docker-compose.yml
 
-.PHONY: install init up down restart build logs clean shell
+.PHONY: install init up down update build logs clean shell
 
 install:
 	@echo "apt update and Install docker"
@@ -22,7 +22,13 @@ down:
 	@echo "🔽 Stopping $(PROJECT_NAME)..."
 	$(DOCKER_COMPOSE) -f $(DC_FILE) down
 
-restart: down up
+update:
+	@echo "🔼 Updating $(PROJECT_NAME)..."
+	$(DOCKER_COMPOSE) -f $(DC_FILE) down --volumes --remove-orphans
+	# 如需全系統清除才開啟以下兩行（小心使用）
+	# docker container prune -f
+	# docker image prune -f
+	$(DOCKER_COMPOSE) -f $(DC_FILE) up -d --build
 
 build:
 	@echo "🔨 Rebuilding containers..."
