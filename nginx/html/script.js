@@ -295,5 +295,10 @@ $(document).ready(function() {
         console.log('Available API functions:', Object.keys(window.portfolioAPI));
     }
 
+    function copyEmail() {
+        navigator.clipboard.writeText('your.email@gmail.com');
+        alert('Email 已複製到剪貼簿！');
+    }
+
     initializePortfolio();
 });
