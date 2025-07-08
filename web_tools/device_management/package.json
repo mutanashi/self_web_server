@@ -2,7 +2,7 @@
   "scripts": {
     "dev": "cross-env NODE_OPTIONS=--max-old-space-size=4096 next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 8000",
     "lint": "next lint",
     "test": "jest",
     "test:coverage": "jest --coverage"
