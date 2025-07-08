@@ -64,8 +64,6 @@ services:
     container_name: device_management
     expose:
       - "8000"
-    env_file:
-      - ./web_tools/device_management/.env
     volumes:
       - ./web_tools/device_management/db_data:/var/lib/postgresql/data
       - ./web_tools/device_management/logs:/app/logs
