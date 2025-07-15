@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人簡歷</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">史昀玉 Nelson</div>
+            <ul class="nav-links">
+                <li><a href="#home">首頁</a></li>
+                <li><a href="#about">關於我</a></li>
+                <li><a href="#portfolio">作品集</a></li>
+                <li><a href="#experience">經歷</a></li>
+                <li><a href="#contact">聯絡</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="profile-img">
+                        <img src = "大頭照.jpg" >
+                    </div>
+                    <h1>Hello, 歡迎來到史昀玉的空間</h1>
+                    <p>web開發者</p>
+                    <a href="#portfolio" class="cta-button">查看作品</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">關於我</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>大學就讀清華數學系，目前就讀於台灣大學資訊工程碩士</p>
+                        <p>喜歡開發各種生活用輔助小程序</p>
+                        <div class="skills">
+                            <span class="skill-tag">全端開發</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">C/C++</span>
+                        </div>
+                    </div>
+                    <div class="about-img">
+                        <div class="profile-img">
+                            <img src = "大頭照.jpg" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="portfolio">
+            <div class="container">
+                <h2 class="section-title">作品集</h2>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item" data-project="1" href="http://www.hihieverysunday.com/webgame/pinball/" >
+                        <div class="portfolio-img">項目預覽圖</div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title">彈珠台</h3>
+                            <p class="portfolio-desc"></p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-project="2">
+                        <div class="portfolio-img">項目預覽圖</div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title">機櫃管理</h3>
+                            <p class="portfolio-desc">移動端友好的響應式設計，提供優秀的用戶體驗。</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-project="3">
+                        <div class="portfolio-img">項目預覽圖</div>
+                        <div class="portfolio-content">
+                            <h3 class="portfolio-title">薪資管理</h3>
+                            <p class="portfolio-desc">品牌識別設計項目，包含完整的視覺系統規劃。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="experience">
+            <div class="container">
+                <h2 class="section-title">工作經歷</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2023 - 現在</div>
+                        <h3 class="timeline-title">資深設計師</h3>
+                        <p class="timeline-desc">負責產品設計和用戶體驗優化，領導設計團隊完成多個重要項目。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2021 - 2023</div>
+                        <h3 class="timeline-title">前端開發工程師</h3>
+                        <p class="timeline-desc">開發響應式網頁應用，使用現代前端框架和工具。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2020 - 2021</div>
+                        <h3 class="timeline-title">UI/UX 設計師</h3>
+                        <p class="timeline-desc">設計移動應用界面，進行用戶研究和可用性測試。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">聯絡我</h2>
+                <p>有任何合作機會或想法想要討論嗎？歡迎與我聯繫！</p>
+                <div class="contact-links">
+                    <a href="mailto:p61415@gmail.com" class="contact-link" onclick="copyEmail()">Email</a>
+                    <a href="#" class="contact-link">LinkedIn</a>
+                    <a href="#" class="contact-link">GitHub</a>
+                    <a href="#" class="contact-link">Behance</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+
+    /* Sidebar variables */
+    --sidebar-background: 222 25% 26%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 222 25% 26%;
+    --sidebar-accent: 223 22% 29%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 223 22% 29%;
+    --sidebar-ring: 221.2 83.2% 53.3%;
+
+    /* Content area variables */
+    --content-background: 0 0% 100%;
+  }
+
+  .dark {
+    /* Base dark theme colors */
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    --card: 224 50% 15%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 75.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+
+    /* Table background - slightly lighter than content but darker than cards */
+    --table-background: 224 50% 18%;
+
+    /* Sidebar variables - making them slightly darker than the main background */
+    --sidebar-background: 222 47% 8%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 222 47% 8%;
+    --sidebar-accent: 223 47% 13%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 223 47% 13%;
+    --sidebar-ring: 221.2 83.2% 53.3%;
+
+    /* Content area variables - darker than cards for contrast */
+    --content-background: 225 50% 8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.content-area {
+  @apply bg-[hsl(var(--content-background))];
+}

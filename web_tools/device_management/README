@@ -1,0 +1,2 @@
+#執行以下指令，以生成 my_device_management(這個image) 
+docker build -t my_device_management 
