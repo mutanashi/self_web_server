@@ -55,7 +55,9 @@ export default function LoginForm() {
 
       case "login-success":
         alert("Login successful. Redirecting…")
-        router.push(data.redirectTo)
+        if (data.redirectTo && router.pathname !== data.redirectTo) {
+          router.push(data.redirectTo);
+        }
         break
 
       default:
