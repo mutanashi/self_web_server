@@ -1,5 +1,5 @@
 "use client"
-import { basePath } from "@/utils/basePath"
+import { basePath } from "@/app/utils/basePath"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 
