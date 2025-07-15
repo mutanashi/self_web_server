@@ -67,7 +67,7 @@ export default function LoginForm() {
 
   const handleLogin = async () => {
     try {
-      const res = await fetch("/api/login_logout_and_register/login", {
+      const res = await fetch(`${basePath}/api/login_logout_and_register/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -81,7 +81,7 @@ export default function LoginForm() {
 
   const handleRegister = async () => {
     try {
-      const res = await fetch("/api/login_logout_and_register/register", {
+      const res = await fetch(`${basePath}/api/login_logout_and_register/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
