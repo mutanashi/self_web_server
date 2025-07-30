@@ -26,8 +26,13 @@ update:
 	@echo "🔼 Updating $(PROJECT_NAME)..."
 	$(DOCKER_COMPOSE) -f $(DC_FILE) down --volumes --remove-orphans
 	# 如需全系統清除才開啟以下兩行（小心使用）
+<<<<<<< HEAD
 	docker container prune -f
 	docker image prune -f
+=======
+	# docker container prune -f
+	# docker image prune -f
+>>>>>>> ab3f93ff25fa531972575795d9eae357a6ea1b1a
 	$(DOCKER_COMPOSE) -f $(DC_FILE) up -d --build
 
 build:
