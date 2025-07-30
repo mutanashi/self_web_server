@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/html:/usr/share/nginx/html:ro
+    depends_on:
+      - meta_server
+      - pinball
+      - salary_tool
+      - device_management
+    networks:
+      - backend
+
+  # Meta Server (FastAPI + DB)
+  meta_server:
+    build: ./meta_server
+    container_name: meta_server
+    expose:
+      - "8000"
+    env_file:
+      - ./meta_server/.env
+    volumes:
+      - ./meta_server/db_data:/var/lib/postgresql/data
+      - ./meta_server/logs:/app/logs
+    networks:
+      - backend
+
+  # Project 1 (FastAPI + DB)
+  pinball:
+    build: ./web_games/pinball
+    container_name: pinball
+    expose:
+      - "8000"
+    env_file:
+      - ./web_games/pinball/.env
+    volumes:
+      - ./web_games/pinball/db_data:/var/lib/postgresql/data
+      - ./web_games/pinball/logs:/app/logs
+    networks:
+      - backend
+
+  # Project 2 (FastAPI + DB)
+  salary_tool:
+    build: ./web_tools/salary_tool
+    container_name: salary_tool
+    expose:
+      - "8000"
+    env_file:
+      - ./web_tools/salary_tool/.env
+    volumes:
+      - ./web_tools/salary_tool/db_data:/var/lib/postgresql/data
+      - ./web_tools/salary_tool/logs:/app/logs
+    networks:
+      - backend
+  
+  device_management:
+    image: my_device_management:latest
+    container_name: device_management
+    expose:
+      - "8000"
+    volumes:
+      - ./web_tools/device_management/db_data:/var/lib/postgresql/data
+      - ./web_tools/device_management/logs:/app/logs
+    networks:
+      - backend
+
+networks:
+  backend:
+
+volumes: {}
