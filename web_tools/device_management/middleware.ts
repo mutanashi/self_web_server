@@ -11,7 +11,8 @@ export async function middleware(req: NextRequest) {
   // 1️⃣ Not logged in → back to /?code=login-required
   if (!token) {
     if (pathname !== "/") {
-      const url = new URL("/", origin)
+      const url = req.nextUrl.clone()
+    url.pathname = "/"
       url.searchParams.set("code", "login-required")
       return NextResponse.redirect(url)
     }
@@ -30,26 +31,30 @@ export async function middleware(req: NextRequest) {
     if (data.valid) {
       userLevel = data.userLevel
     } else {
-      const url = new URL("/", origin)
+      const url = req.nextUrl.clone()
+      url.pathname = "/"
       url.searchParams.set("code", "login-required")
       return NextResponse.redirect(url)
     }
   } catch (err) {
-    const url = new URL("/", origin)
+    const url = req.nextUrl.clone()
+    url.pathname = "/"
     url.searchParams.set("code", "login-required")
     return NextResponse.redirect(url)
   }
 
   // 3️⃣ Normal user tried to access admin pages
   if (userLevel !== "admin" && pathname.startsWith("/dashboard")) {
-    const url = new URL("/", origin)
+    const url = req.nextUrl.clone()
+    url.pathname = "/"
     url.searchParams.set("code", "no-permission")
     return NextResponse.redirect(url)
   }
 
   // 4️⃣ Admin tried to access user-dashboard pages
   if (userLevel !== "user" && pathname.startsWith("/user-dashboard")) {
-    const url = new URL("/", origin)
+    const url = req.nextUrl.clone()
+    url.pathname = "/"
     url.searchParams.set("code", "no-permission")
     return NextResponse.redirect(url)
   }
