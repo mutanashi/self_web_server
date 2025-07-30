@@ -65,7 +65,7 @@ services:
     expose:
       - "8000"
     volumes:
-      - ./web_tools/device_management/db_data:/var/lib/postgresql/data
+      - ./web_tools/device_management/db_data:/app/db
       - ./web_tools/device_management/logs:/app/logs
     networks:
       - backend
