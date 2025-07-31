@@ -12,7 +12,6 @@ WORKDIR /app
 COPY --from=builder /app/app ./app
 COPY --from=builder /app/lib ./lib
 COPY --from=builder /app/components ./components
-COPY --from=builder /app/middleware.ts ./middleware.ts
 COPY --from=builder /app/next.config.mjs ./next.config.mjs
 COPY --from=builder /app/types.tsx ./types.tsx
 COPY --from=builder /app/public ./public
