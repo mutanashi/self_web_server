@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: salary_postgres
+    environment:
+      POSTGRES_DB: salary_system
+      POSTGRES_USER: salary_user
+      POSTGRES_PASSWORD: salary_pass123
+      POSTGRES_ROOT_PASSWORD: root123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - salary_network
+
+  salary_app:
+    build: .
+    container_name: salary_app
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/salary_system
+      SPRING_DATASOURCE_USERNAME: salary_user
+      SPRING_DATASOURCE_PASSWORD: salary_pass123
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: true
+      SPRING_MAIL_HOST: smtp.gmail.com
+      SPRING_MAIL_PORT: 587
+      SPRING_MAIL_USERNAME: p61415@gmail.com
+      SPRING_MAIL_PASSWORD: jgko nbuu figb ezrd
+    networks:
+      - salary_network
+    volumes:
+      - ./exports:/app/exports
+
+volumes:
+  postgres_data:
+
+networks:
+  salary_network:
+    driver: bridge
