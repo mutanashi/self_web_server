@@ -12,7 +12,7 @@ services:
     depends_on:
       - meta_server
       - pinball
-      - salary_tool
+    #  - salary_tool
       - device_management
     networks:
       - backend
