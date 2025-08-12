@@ -33,7 +33,7 @@ services:
       SPRING_MAIL_HOST: smtp.gmail.com
       SPRING_MAIL_PORT: 587
       SPRING_MAIL_USERNAME: p61415@gmail.com
-      SPRING_MAIL_PASSWORD: jgko nbuu figb ezrd
+      SPRING_MAIL_PASSWORD: jgkonbuufigbezrd
     networks:
       - salary_network
     volumes:
