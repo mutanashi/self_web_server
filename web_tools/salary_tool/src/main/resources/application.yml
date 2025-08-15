@@ -21,7 +21,7 @@ spring:
     host: ${SPRING_MAIL_HOST:smtp.gmail.com}
     port: ${SPRING_MAIL_PORT:587}
     username: ${SPRING_MAIL_USERNAME:p61415@gmail.com}
-    password: ${SPRING_MAIL_PASSWORD:jgkonbuufigbezrd}
+    password: ${SPRING_MAIL_PASSWORD:}
     properties:
       mail:
         smtp:
@@ -30,8 +30,11 @@ spring:
             enable: true
 
 jwt:
-  secret: ${JWT_SECRET:mySecretKey}
-  expiration: ${JWT_EXPIRATION:86400000} # 24 hours
+  secret: "${JWT_SECRET:mySecretKey}"
+  expiration: "${JWT_EXPIRATION:86400000}" # 24 hours
+
+tempToken:
+  expirationSeconds: ${TEMP_TOKEN_EXPIRATION_SECONDS:600}
 
 logging:
   level:

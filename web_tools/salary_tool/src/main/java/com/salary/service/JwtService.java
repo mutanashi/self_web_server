@@ -1,76 +1,65 @@
 package com.salary.service;
 
-import java.security.Key;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
-
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
 
 @Service
 public class JwtService {
+    private final SecretKey key;
+    private final long expirationMs;
 
-    @Value("${jwt.secret}")
-    private String secret;
-
-    @Value("${jwt.expiration}")
-    private Long expiration;
-
-    public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
+    public JwtService(
+            @Value("${jwt.secret:mySecretKey}") String secret,
+            @Value("${jwt.expiration:86400000}") String expirationStr
+    ) {
+        byte[] bytes = secret.getBytes(StandardCharsets.UTF_8);
+        // Ensure at least 256-bit key for HS256
+        if (bytes.length < 32) {
+            byte[] padded = new byte[32];
+            System.arraycopy(bytes, 0, padded, 0, Math.min(bytes.length, 32));
+            this.key = Keys.hmacShaKeyFor(padded);
+        } else {
+            this.key = Keys.hmacShaKeyFor(bytes);
+        }
+        long exp = 86400000L;
+        if (expirationStr != null && !expirationStr.isBlank()) {
+            String s = expirationStr.trim();
+            // Workaround if resource filtering stripped ${}, leaving "ENV:default"
+            int colon = s.indexOf(':');
+            if (colon >= 0 && !s.startsWith("P")) { // crude check to avoid ISO-8601 durations
+                s = s.substring(colon + 1).trim();
+            }
+            try { exp = Long.parseLong(s); } catch (NumberFormatException ignored) {}
+        }
+        this.expirationMs = exp;
     }
 
-    public Date extractExpiration(String token) {
-        return extractClaim(token, Claims::getExpiration);
-    }
-
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
-    }
-
-    private Claims extractAllClaims(String token) {
-        return Jwts.parserBuilder()
-                .setSigningKey(getSignKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-    }
-
-    private Boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
-    }
-
-    public String generateToken(UserDetails userDetails) {
-        Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, userDetails.getUsername());
-    }
-
-    private String createToken(Map<String, Object> claims, String subject) {
+    public String generateToken(String subject) {
+        Date now = new Date();
+        Date expiry = new Date(now.getTime() + expirationMs);
         return Jwts.builder()
-                .setClaims(claims)
                 .setSubject(subject)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(getSignKey(), SignatureAlgorithm.HS256)
+                .setIssuedAt(now)
+                .setExpiration(expiry)
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    private Key getSignKey() {
-        byte[] keyBytes = secret.getBytes();
-        return Keys.hmacShaKeyFor(keyBytes);
-    }
-
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    public String validateAndGetSubject(String token) {
+        try {
+            Jws<Claims> jws = Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token);
+            return jws.getBody().getSubject();
+        } catch (JwtException | IllegalArgumentException e) {
+            return null;
+        }
     }
 }

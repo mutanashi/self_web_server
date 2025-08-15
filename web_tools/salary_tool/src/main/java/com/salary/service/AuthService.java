@@ -5,107 +5,67 @@ import com.salary.dto.AuthResponse;
 import com.salary.dto.RegisterRequest;
 import com.salary.entity.User;
 import com.salary.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class AuthService {
+    private final UserRepository users;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
+    private final EmailService emailService;
+    private final TemporaryTokenService tempTokenService;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private JwtService jwtService;
-
-    @Autowired
-    private EmailService emailService;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    public AuthResponse register(RegisterRequest request) {
-        // Check if username exists
-        if (userRepository.findByUsername(request.getUsername()).isPresent()) {
-            throw new RuntimeException("用戶名已存在");
-        }
-
-        // Check if email exists
-        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            throw new RuntimeException("郵箱已被註冊");
-        }
-
-        // Create new user
-        User user = new User();
-        user.setUsername(request.getUsername());
-        user.setEmail(request.getEmail());
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole(User.Role.BOSS); // First user is boss, others are employees
-        user.setVerificationToken(UUID.randomUUID().toString());
-
-        // Check if this is the first user (make them boss)
-        long userCount = userRepository.count();
-        if (userCount > 0) {
-            user.setRole(User.Role.EMPLOYEE);
-        }
-
-        userRepository.save(user);
-
-        // Send verification email
-        emailService.sendVerificationEmail(user);
-
-        // Generate JWT token
-        String jwt = jwtService.generateToken(user);
-
-        return new AuthResponse(jwt, user);
+    public AuthService(UserRepository users, PasswordEncoder passwordEncoder, JwtService jwtService, EmailService emailService, TemporaryTokenService tempTokenService) {
+        this.users = users;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
+        this.emailService = emailService;
+        this.tempTokenService = tempTokenService;
     }
 
-    public AuthResponse authenticate(AuthRequest request) {
-        authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(
-                request.getUsername(),
-                request.getPassword()
-            )
-        );
-
-        User user = userRepository.findByUsername(request.getUsername())
-            .orElseThrow(() -> new RuntimeException("用戶不存在"));
-
-        if (!user.isEmailVerified()) {
-            throw new RuntimeException("請先驗證郵箱");
-        }
-
-        String jwt = jwtService.generateToken(user);
-        return new AuthResponse(jwt, user);
+    @Transactional
+    public void register(RegisterRequest req) {
+        users.findByEmail(req.getEmail().toLowerCase()).ifPresent(u -> { throw new IllegalArgumentException("Email already exists"); });
+        users.findByUsername(req.getUsername()).ifPresent(u -> { throw new IllegalArgumentException("Username already exists"); });
+        User u = new User();
+        u.setEmail(req.getEmail().toLowerCase());
+        u.setUsername(req.getUsername());
+        u.setPassword(passwordEncoder.encode(req.getPassword()));
+        u.setEnabled(false);
+        String token = UUID.randomUUID().toString().replaceAll("-", "");
+        u.setVerificationToken(token);
+        users.save(u);
+        emailService.sendVerificationEmail(u.getEmail(), token);
     }
 
-    public void verifyEmail(String token) {
-        User user = userRepository.findByVerificationToken(token)
-            .orElseThrow(() -> new RuntimeException("無效的驗證令牌"));
-
-        user.setEmailVerified(true);
-        user.setVerificationToken(null);
-        userRepository.save(user);
+    @Transactional
+    public String verify(String token) {
+        Optional<User> ou = users.findByVerificationToken(token);
+        if (ou.isEmpty()) return "Invalid token";
+        User u = ou.get();
+        u.setEnabled(true);
+        u.setVerificationToken(null);
+        users.save(u);
+        return "Verified";
     }
 
-    public void resendVerificationEmail(String email) {
-        User user = userRepository.findByEmail(email)
-            .orElseThrow(() -> new RuntimeException("用戶不存在"));
-
-        if (user.isEmailVerified()) {
-            throw new RuntimeException("郵箱已驗證");
+    public AuthResponse login(AuthRequest req) {
+        User u = users.findByEmail(req.getEmail().toLowerCase())
+                .orElseThrow(() -> new BadCredentialsException("Bad credentials"));
+        if (!u.isEnabled()) {
+            throw new BadCredentialsException("Account not verified");
         }
-
-        user.setVerificationToken(UUID.randomUUID().toString());
-        userRepository.save(user);
-
-        emailService.sendVerificationEmail(user);
+        if (!passwordEncoder.matches(req.getPassword(), u.getPassword())) {
+            throw new BadCredentialsException("Bad credentials");
+        }
+        String token = jwtService.generateToken(u.getEmail());
+        String tempToken = tempTokenService.issue(u.getEmail());
+        return new AuthResponse(token, tempToken);
     }
 }

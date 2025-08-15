@@ -1,46 +1,46 @@
 package com.salary.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
-import com.salary.entity.User;
 
 @Service
 public class EmailService {
+    private static final Logger log = LoggerFactory.getLogger(EmailService.class);
+    private final JavaMailSender mailSender;
 
-    @Autowired
-    private JavaMailSender mailSender;
+    @Value("${spring.mail.username:}")
+    private String from;
 
-    @Value("${spring.mail.username}")
-    private String fromEmail;
+    @Value("${server.port:8080}")
+    private int serverPort;
 
-    @Async
-    public void sendVerificationEmail(User user) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(fromEmail);
-        message.setTo(user.getEmail());
-        message.setSubject("薪資系統 - 郵箱驗證");
-        message.setText("請點擊以下鏈接驗證您的郵箱：\n" +
-                "http://localhost:8080/api/auth/verify-email?token=" + user.getVerificationToken());
-        
-        mailSender.send(message);
+    public EmailService(JavaMailSender mailSender) {
+        this.mailSender = mailSender;
     }
 
-    @Async
-    public void sendEmployeeCredentials(User employee, String password) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(fromEmail);
-        message.setTo(employee.getEmail());
-        message.setSubject("薪資系統 - 帳號資訊");
-        message.setText("您的薪資系統帳號已創建：\n" +
-                "用戶名：" + employee.getUsername() + "\n" +
-                "密碼：" + password + "\n" +
-                "請登錄後修改密碼。");
-        
-        mailSender.send(message);
+    public void sendVerificationEmail(String to, String token) {
+        String verifyUrl = "http://localhost:" + serverPort + "/api/auth/verify?token=" + token;
+        String subject = "Verify your Salary System account";
+        String text = "Welcome! Please verify your email by visiting: " + verifyUrl +
+                "\nIf the link doesn't work, use this token: " + token;
+        sendSimpleEmail(to, subject, text);
+    }
+
+    public void sendSimpleEmail(String to, String subject, String text) {
+        try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(to);
+            if (from != null && !from.isBlank()) message.setFrom(from);
+            message.setSubject(subject);
+            message.setText(text);
+            mailSender.send(message);
+            log.info("Sent email to {} with subject '{}'", to, subject);
+        } catch (Exception e) {
+            log.warn("Failed to send email: {}", e.getMessage());
+        }
     }
 }
