@@ -1,27 +1,16 @@
-// ExportRequest.java
 package com.salary.dto;
 
-import java.util.List;
-
-import com.salary.entity.User;
+import java.util.Set;
 
 public class ExportRequest {
-    private int year;
-    private int month;
-    private List<User.Label> labels;
-    private List<Long> employeeIds;
+    private Set<String> labelNames; // optional
+    private Integer year; // optional filter
+    private Integer month; // optional filter
 
-    public ExportRequest() {}
-
-    public int getYear() { return year; }
-    public void setYear(int year) { this.year = year; }
-
-    public int getMonth() { return month; }
-    public void setMonth(int month) { this.month = month; }
-
-    public List<User.Label> getLabels() { return labels; }
-    public void setLabels(List<User.Label> labels) { this.labels = labels; }
-
-    public List<Long> getEmployeeIds() { return employeeIds; }
-    public void setEmployeeIds(List<Long> employeeIds) { this.employeeIds = employeeIds; }
+    public Set<String> getLabelNames() { return labelNames; }
+    public void setLabelNames(Set<String> labelNames) { this.labelNames = labelNames; }
+    public Integer getYear() { return year; }
+    public void setYear(Integer year) { this.year = year; }
+    public Integer getMonth() { return month; }
+    public void setMonth(Integer month) { this.month = month; }
 }

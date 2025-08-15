@@ -1,0 +1,10 @@
+.git
+target
+exports
+README.md
+docker-compose.yml
+.dockerignore
+.DS_Store
+**/.idea
+**/.vscode
+**/*.log
