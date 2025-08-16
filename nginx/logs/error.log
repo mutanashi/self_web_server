@@ -1,0 +1,53 @@
+2025/08/16 08:54:50 [emerg] 1#1: host not found in upstream "device-management-service:8000" in /etc/nginx/nginx.conf:38
+2025/08/16 08:54:52 [emerg] 1#1: host not found in upstream "salary-tool-service:8080" in /etc/nginx/nginx.conf:42
+2025/08/16 08:54:53 [emerg] 1#1: host not found in upstream "salary-tool-service:8080" in /etc/nginx/nginx.conf:42
+2025/08/16 08:54:55 [emerg] 1#1: host not found in upstream "salary-tool-service:8080" in /etc/nginx/nginx.conf:42
+2025/08/16 08:54:56 [emerg] 1#1: host not found in upstream "salary-tool-service:8080" in /etc/nginx/nginx.conf:42
+2025/08/16 08:54:59 [emerg] 1#1: host not found in upstream "salary-tool-service:8080" in /etc/nginx/nginx.conf:42
+2025/08/16 08:55:03 [emerg] 1#1: host not found in upstream "salary-tool-service:8080" in /etc/nginx/nginx.conf:42
+2025/08/16 08:55:10 [emerg] 1#1: host not found in upstream "salary-tool-service:8080" in /etc/nginx/nginx.conf:42
+2025/08/16 08:55:24 [emerg] 1#1: host not found in upstream "salary-tool-service:8080" in /etc/nginx/nginx.conf:42
+2025/08/16 08:55:50 [emerg] 1#1: host not found in upstream "salary-tool-service:8080" in /etc/nginx/nginx.conf:42
+2025/08/16 08:56:42 [emerg] 1#1: host not found in upstream "salary-tool-service:8080" in /etc/nginx/nginx.conf:42
+2025/08/16 08:57:43 [emerg] 1#1: host not found in upstream "salary-tool-service:8080" in /etc/nginx/nginx.conf:42
+2025/08/16 08:58:44 [emerg] 1#1: host not found in upstream "salary-tool-service:8080" in /etc/nginx/nginx.conf:42
+2025/08/16 08:59:45 [emerg] 1#1: host not found in upstream "salary-tool-service" in /etc/nginx/nginx.conf:81
+2025/08/16 09:00:46 [emerg] 1#1: host not found in upstream "salary-tool-service" in /etc/nginx/nginx.conf:81
+2025/08/16 09:01:47 [emerg] 1#1: host not found in upstream "salary-tool-service" in /etc/nginx/nginx.conf:81
+2025/08/16 09:02:47 [emerg] 1#1: host not found in upstream "device-management-service" in /etc/nginx/nginx.conf:62
+2025/08/16 09:03:48 [emerg] 1#1: host not found in upstream "device-management-service" in /etc/nginx/nginx.conf:62
+2025/08/16 09:04:49 [emerg] 1#1: host not found in upstream "device-management-service" in /etc/nginx/nginx.conf:62
+2025/08/16 09:05:50 [emerg] 1#1: host not found in upstream "device-management-service" in /etc/nginx/nginx.conf:62
+2025/08/16 09:06:27 [emerg] 1#1: host not found in upstream "device-management-service" in /etc/nginx/nginx.conf:62
+2025/08/16 09:06:28 [emerg] 1#1: host not found in upstream "salary-tool-service" in /etc/nginx/nginx.conf:81
+2025/08/16 09:06:30 [emerg] 1#1: host not found in upstream "salary-tool-service" in /etc/nginx/nginx.conf:81
+2025/08/16 09:06:31 [emerg] 1#1: host not found in upstream "salary-tool-service" in /etc/nginx/nginx.conf:81
+2025/08/16 09:06:36 [emerg] 1#1: host not found in upstream "salary-tool-service" in /etc/nginx/nginx.conf:81
+2025/08/16 09:24:20 [emerg] 30#30: host not found in upstream "device-management_service" in /etc/nginx/nginx.conf:62
+2025/08/16 09:24:31 [emerg] 1#1: host not found in upstream "device-management_service" in /etc/nginx/nginx.conf:62
+2025/08/16 09:24:32 [emerg] 1#1: host not found in upstream "device-management_service" in /etc/nginx/nginx.conf:62
+2025/08/16 09:24:33 [emerg] 1#1: host not found in upstream "device-management_service" in /etc/nginx/nginx.conf:62
+2025/08/16 09:24:34 [emerg] 1#1: host not found in upstream "device-management_service" in /etc/nginx/nginx.conf:62
+2025/08/16 09:24:35 [emerg] 1#1: host not found in upstream "device-management_service" in /etc/nginx/nginx.conf:62
+2025/08/16 09:24:38 [emerg] 1#1: host not found in upstream "device-management_service" in /etc/nginx/nginx.conf:62
+2025/08/16 09:24:42 [emerg] 1#1: host not found in upstream "device-management_service" in /etc/nginx/nginx.conf:62
+2025/08/16 09:24:49 [emerg] 1#1: host not found in upstream "device-management_service" in /etc/nginx/nginx.conf:62
+2025/08/16 09:25:03 [emerg] 1#1: host not found in upstream "device-management_service" in /etc/nginx/nginx.conf:62
+2025/08/16 09:25:29 [emerg] 1#1: host not found in upstream "device-management_service" in /etc/nginx/nginx.conf:62
+2025/08/16 09:35:17 [error] 22#22: *48 open() "/usr/share/nginx/html/theme/default/assets/compoments.js" failed (2: No such file or directory), client: 141.101.76.10, server: _, request: "GET /theme/default/assets/compoments.js HTTP/1.1", host: "skilltp.rest"
+2025/08/16 09:35:23 [error] 22#22: *49 open() "/usr/share/nginx/html/theme/default/assets/umi.js" failed (2: No such file or directory), client: 172.71.99.66, server: _, request: "GET /theme/default/assets/umi.js HTTP/1.1", host: "skilltp.rest"
+2025/08/16 10:09:20 [error] 23#23: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 111.241.190.102, server: _, request: "GET /web_tools/device_management/ HTTP/1.1", upstream: "http://[::1]:8000/web_tools/device_management/", host: "www.hihieverysunday.com", referrer: "http://www.hihieverysunday.com/"
+2025/08/16 10:09:20 [warn] 23#23: *1 upstream server temporarily disabled while connecting to upstream, client: 111.241.190.102, server: _, request: "GET /web_tools/device_management/ HTTP/1.1", upstream: "http://[::1]:8000/web_tools/device_management/", host: "www.hihieverysunday.com", referrer: "http://www.hihieverysunday.com/"
+2025/08/16 10:09:20 [error] 23#23: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 111.241.190.102, server: _, request: "GET /web_tools/device_management/ HTTP/1.1", upstream: "http://127.0.0.1:8000/web_tools/device_management/", host: "www.hihieverysunday.com", referrer: "http://www.hihieverysunday.com/"
+2025/08/16 10:09:20 [warn] 23#23: *1 upstream server temporarily disabled while connecting to upstream, client: 111.241.190.102, server: _, request: "GET /web_tools/device_management/ HTTP/1.1", upstream: "http://127.0.0.1:8000/web_tools/device_management/", host: "www.hihieverysunday.com", referrer: "http://www.hihieverysunday.com/"
+2025/08/16 10:16:46 [error] 23#23: *8 connect() failed (111: Connection refused) while connecting to upstream, client: 111.241.190.102, server: _, request: "GET /web_tools/device_management/ HTTP/1.1", upstream: "http://127.0.0.1:8000/web_tools/device_management/", host: "www.hihieverysunday.com", referrer: "http://www.hihieverysunday.com/"
+2025/08/16 10:16:46 [warn] 23#23: *8 upstream server temporarily disabled while connecting to upstream, client: 111.241.190.102, server: _, request: "GET /web_tools/device_management/ HTTP/1.1", upstream: "http://127.0.0.1:8000/web_tools/device_management/", host: "www.hihieverysunday.com", referrer: "http://www.hihieverysunday.com/"
+2025/08/16 10:16:46 [error] 23#23: *8 connect() failed (111: Connection refused) while connecting to upstream, client: 111.241.190.102, server: _, request: "GET /web_tools/device_management/ HTTP/1.1", upstream: "http://[::1]:8000/web_tools/device_management/", host: "www.hihieverysunday.com", referrer: "http://www.hihieverysunday.com/"
+2025/08/16 10:16:46 [warn] 23#23: *8 upstream server temporarily disabled while connecting to upstream, client: 111.241.190.102, server: _, request: "GET /web_tools/device_management/ HTTP/1.1", upstream: "http://[::1]:8000/web_tools/device_management/", host: "www.hihieverysunday.com", referrer: "http://www.hihieverysunday.com/"
+2025/08/16 10:20:43 [error] 23#23: *13 connect() failed (111: Connection refused) while connecting to upstream, client: 98.82.130.157, server: _, request: "GET /web_tools/device_management/ HTTP/1.1", upstream: "http://127.0.0.1:8000/web_tools/device_management/", host: "www.hihieverysunday.com"
+2025/08/16 10:20:43 [warn] 23#23: *13 upstream server temporarily disabled while connecting to upstream, client: 98.82.130.157, server: _, request: "GET /web_tools/device_management/ HTTP/1.1", upstream: "http://127.0.0.1:8000/web_tools/device_management/", host: "www.hihieverysunday.com"
+2025/08/16 10:20:43 [error] 23#23: *13 connect() failed (111: Connection refused) while connecting to upstream, client: 98.82.130.157, server: _, request: "GET /web_tools/device_management/ HTTP/1.1", upstream: "http://[::1]:8000/web_tools/device_management/", host: "www.hihieverysunday.com"
+2025/08/16 10:20:43 [warn] 23#23: *13 upstream server temporarily disabled while connecting to upstream, client: 98.82.130.157, server: _, request: "GET /web_tools/device_management/ HTTP/1.1", upstream: "http://[::1]:8000/web_tools/device_management/", host: "www.hihieverysunday.com"
+2025/08/16 10:20:44 [error] 23#23: *13 no live upstreams while connecting to upstream, client: 98.82.130.157, server: _, request: "GET /web_tools/device_management/ HTTP/1.1", upstream: "http://localhost/web_tools/device_management/", host: "www.hihieverysunday.com"
+2025/08/16 10:20:46 [error] 23#23: *13 no live upstreams while connecting to upstream, client: 98.82.130.157, server: _, request: "GET /web_tools/device_management/ HTTP/1.1", upstream: "http://localhost/web_tools/device_management/", host: "www.hihieverysunday.com"
+2025/08/16 10:26:14 [error] 23#23: *3 open() "/usr/share/nginx/html/placeholder.svg" failed (2: No such file or directory), client: 111.241.190.102, server: _, request: "GET /placeholder.svg HTTP/1.1", host: "www.hihieverysunday.com", referrer: "http://www.hihieverysunday.com/web_tools/device_management/user-dashboard"

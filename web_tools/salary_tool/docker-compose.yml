@@ -22,9 +22,9 @@ services:
     networks:
       - salary_network
 
-  salary_app:
+  salary-tool-service:
     build: .
-    container_name: salary_app
+    container_name: salary-tool-service
     depends_on:
       postgres:
         condition: service_healthy
@@ -44,6 +44,9 @@ services:
       JWT_EXPIRATION: ${JWT_EXPIRATION:-86400000}
     networks:
       - salary_network
+      - microservices
+    restart: unless-stopped
+
     volumes:
       - ./exports:/app/exports
 
@@ -53,3 +56,6 @@ volumes:
 networks:
   salary_network:
     driver: bridge
+  microservices:
+    external: true
+    name: microservices

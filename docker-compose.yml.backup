@@ -12,6 +12,7 @@ services:
     depends_on:
       - meta_server
       - pinball
+    #  - salary_tool
       - device_management
     networks:
       - backend
@@ -43,6 +44,20 @@ services:
       - ./web_games/pinball/logs:/app/logs
     networks:
       - backend
+
+  # Project 2 (FastAPI + DB)
+#  salary_tool:
+#    build: ./web_tools/salary_tool
+#    container_name: salary_tool
+#    expose:
+#      - "8000"
+#    env_file:
+#      - ./web_tools/salary_tool/.env
+#    volumes:
+#      - ./web_tools/salary_tool/db_data:/var/lib/postgresql/data
+#      - ./web_tools/salary_tool/logs:/app/logs
+#    networks:
+#      - backend
   
   device_management:
     image: my_device_management:latest
@@ -57,6 +72,5 @@ services:
 
 networks:
   backend:
-    driver: bridge
 
 volumes: {}

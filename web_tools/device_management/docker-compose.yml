@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  device-management-service:
+    image: my_device_management:latest
+    container_name: device-management-service
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./db_data:/app/db
+      - ./logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - microservices
+
+
+networks:
+  microservices:
+    external: true
+    name: microservices

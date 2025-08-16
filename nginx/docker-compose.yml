@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-gateway
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./html:/usr/share/nginx/html:ro
+      - ./logs:/var/log/nginx
+    restart: unless-stopped
+    networks:
+      - microservices
+    healthcheck:
+      test: ["CMD", "nginx", "-t"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  microservices:
+    driver: bridge
+    name: microservices

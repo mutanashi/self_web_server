@@ -1,9 +1,11 @@
 server:
   port: 8080
+  servlet:
+    context-path: /web_tools/salary_tool
 
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/salary_system}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://postgres:5432/salary_system}
     username: ${SPRING_DATASOURCE_USERNAME:salary_user}
     password: ${SPRING_DATASOURCE_PASSWORD:salary_pass123}
     driver-class-name: org.postgresql.Driver

@@ -164,8 +164,17 @@
       const $ = (id) => document.getElementById(id);
       const out = (el, text, ok=true) => { el.textContent = typeof text === 'string' ? text : JSON.stringify(text, null, 2); el.className = ok ? 'ok' : 'err'; $('out-raw').textContent = el.textContent; };
 
+      // Auto-detect base URL when running behind proxy
+      const detectBaseUrl = () => {
+        const path = window.location.pathname;
+        if (path.includes('/web_tools/salary_tool/')) {
+          return '/web_tools/salary_tool';
+        }
+        return '';
+      };
+
       const state = {
-        base: localStorage.getItem('base') || '',
+        base: localStorage.getItem('base') || detectBaseUrl(),
         token: localStorage.getItem('jwt') || ''
       };
 
