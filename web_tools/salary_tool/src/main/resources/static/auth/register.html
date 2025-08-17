@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Register - Salary Tool</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script src="../js/base.js"></script>
+    <script src="../js/http.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Register</h1>
+      <nav><a href="login.html">Login</a></nav>
+    </header>
+
+    <section>
+      <div class="row"><label>Username</label><input id="username" /></div>
+      <div class="row"><label>Email</label><input id="email" type="email" /></div>
+      <div class="row"><label>Password</label><input id="password" type="password" /></div>
+      <div class="row"><button id="btn-register">Register</button></div>
+      <pre id="out" class="muted">Ready.</pre>
+    </section>
+
+    <script>
+      const out = (t, ok=true)=>{ const el=document.getElementById('out'); el.textContent=typeof t==='string'?t:JSON.stringify(t,null,2); el.className=ok?'ok':'err'; };
+      document.getElementById('btn-register').onclick = async () => {
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const resp = await Http.post(App.API + '/auth/register', { username, email, password });
+        out(resp, resp.ok);
+      };
+    </script>
+  </body>
+</html>
+
+
+
+

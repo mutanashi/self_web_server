@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Email Me</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script src="../js/base.js"></script>
+    <script src="../js/http.js"></script>
+    <script src="../js/auth.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Email Me</h1>
+      <nav><a href="../dashboard.html">Dashboard</a></nav>
+    </header>
+    <section>
+      <div class="row"><label>Subject</label><input id="subject" /></div>
+      <div class="row"><label>Body</label><textarea id="body" rows="5" cols="40"></textarea></div>
+      <div class="row"><button id="btn">Send</button></div>
+      <pre id="out">Ready.</pre>
+    </section>
+    <script>
+      Auth.requireAuth();
+      const out=(t)=>document.getElementById('out').textContent=typeof t==='string'?t:JSON.stringify(t,null,2);
+      document.getElementById('btn').onclick = async ()=>{
+        const subject=document.getElementById('subject').value.trim();
+        const body=document.getElementById('body').value.trim();
+        const r = await Http.post(App.API + '/employee/email-me', { subject, body });
+        out(r);
+      };
+    </script>
+  </body>
+</html>
+
+
+
+

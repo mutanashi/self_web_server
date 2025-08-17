@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard - Salary Tool</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="js/base.js"></script>
+    <script src="js/auth.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Dashboard</h1>
+      <nav>
+        <a href="auth/login.html">Login</a>
+        <a href="logout.html">Logout</a>
+        <a href="employee/public-items.html">Public Items</a>
+        <a href="employee/clock-in.html">Clock In</a>
+        <a href="employee/salaries.html">Salaries</a>
+        <a href="employee/attendances.html">Attendances</a>
+        <a href="employee/email-me.html">Email Me</a>
+        <a href="boss/create-employee.html">Create Employee</a>
+        <a href="boss/create-public-item.html">Create Public Item</a>
+        <a href="boss/export.html">Export</a>
+      </nav>
+    </header>
+    <section>
+      <p class="muted">Use the links above to access features. Protected pages will require a JWT.</p>
+    </section>
+    <script>Auth.requireAuth();</script>
+  </body>
+</html>
+
+
+
+

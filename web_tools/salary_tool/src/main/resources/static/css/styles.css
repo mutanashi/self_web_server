@@ -1,0 +1,16 @@
+:root { --fg:#222; --muted:#666; --ok:#0a7f2e; --err:#b00020; --bg:#fff; --border:#e5e7eb; }
+*{box-sizing:border-box} body{font-family:system-ui,Arial,sans-serif; color:var(--fg); background:var(--bg); margin:2rem}
+header{display:flex; gap:1rem; align-items:center; margin-bottom:1rem}
+nav a{margin-right:1rem}
+section{margin:1rem 0; padding:1rem; border:1px solid var(--border); border-radius:8px}
+label{display:inline-block; min-width:120px}
+input,button,textarea{padding:.45rem .6rem; font-size:.95rem}
+pre{background:#fafafa; padding:.75rem; border:1px solid var(--border); border-radius:6px}
+.ok{color:var(--ok)} .err{color:var(--err)} .muted{color:var(--muted)}
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1rem}
+.row{display:flex; gap:.5rem; align-items:center}
+button{cursor:pointer}
+
+
+
+

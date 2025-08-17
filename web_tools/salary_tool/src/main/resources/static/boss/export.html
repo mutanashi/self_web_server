@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Export Employees</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script src="../js/base.js"></script>
+    <script src="../js/http.js"></script>
+    <script src="../js/auth.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Export Employees</h1>
+      <nav><a href="../dashboard.html">Dashboard</a></nav>
+    </header>
+    <section>
+      <div class="row"><label>Labels</label><input id="labels" placeholder="A,B" /></div>
+      <div class="row"><label>Year</label><input id="year" type="number" /></div>
+      <div class="row"><label>Month</label><input id="month" type="number" /></div>
+      <div class="row"><button id="btn">Export</button></div>
+      <pre id="out">Ready.</pre>
+    </section>
+    <script>
+      Auth.requireAuth();
+      const out=(t)=>document.getElementById('out').textContent=typeof t==='string'?t:JSON.stringify(t,null,2);
+      document.getElementById('btn').onclick = async ()=>{
+        const labelsRaw=document.getElementById('labels').value.trim();
+        const year=document.getElementById('year').value.trim();
+        const month=document.getElementById('month').value.trim();
+        const body={};
+        if(labelsRaw){ body.labelNames = labelsRaw.split(',').map(s=>s.trim()).filter(Boolean); }
+        if(year) body.year = Number(year);
+        if(month) body.month = Number(month);
+        const r = await Http.post(App.API + '/boss/export', body);
+        out(r);
+      };
+    </script>
+  </body>
+</html>
+
+
+
+

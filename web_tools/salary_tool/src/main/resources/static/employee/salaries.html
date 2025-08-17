@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Salaries</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script src="../js/base.js"></script>
+    <script src="../js/http.js"></script>
+    <script src="../js/auth.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Salaries</h1>
+      <nav><a href="../dashboard.html">Dashboard</a></nav>
+    </header>
+    <section>
+      <div class="row"><label>Year</label><input id="year" type="number" placeholder="e.g. 2025" /></div>
+      <div class="row"><label>Month</label><input id="month" type="number" placeholder="1-12" /></div>
+      <div class="row"><button id="btn">Fetch</button></div>
+      <pre id="out">Ready.</pre>
+    </section>
+    <script>
+      Auth.requireAuth();
+      const out=(t)=>document.getElementById('out').textContent=typeof t==='string'?t:JSON.stringify(t,null,2);
+      document.getElementById('btn').onclick = async ()=>{
+        const y=document.getElementById('year').value.trim();
+        const m=document.getElementById('month').value.trim();
+        const q=new URLSearchParams();
+        if(y) q.set('year', y); if(m) q.set('month', m);
+        const r = await Http.get(App.API + '/employee/salaries' + (q.toString()?('?'+q.toString()):''));
+        out(r);
+      };
+    </script>
+  </body>
+</html>
+
+
+
+

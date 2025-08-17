@@ -63,6 +63,9 @@ public class SecurityConfig {
                                 "/favicon.ico", "/**/*.css", "/**/*.js", "/**/*.map",
                                 "/**/*.png", "/**/*.jpg", "/**/*.jpeg", "/**/*.svg",
                                 "/assets/**", "/webjars/**",
+                                "/_next/**",
+                                "/**/*.html",
+                                "/employee/**", "/boss/**", "/developer/**",
                                 "/api/auth/**"
                         ).permitAll()
                         .anyRequest().authenticated()
