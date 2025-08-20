@@ -46,7 +46,7 @@ services:
   
   device_management:
     build: ./web_tools/device_management
-    container_name: device_management
+    container_name: device-management-service
     expose:
       - "8000"
     volumes:

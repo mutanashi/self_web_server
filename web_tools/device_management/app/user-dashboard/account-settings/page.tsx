@@ -44,6 +44,9 @@ export default function UserAccountSettingsPage() {
     if (data.success) {
       toast({ title: "Username updated." })
       setStatusMsg("Success: Username updated.")
+      
+      // Force a page reload to update all components that read from cookies
+      window.location.reload()
     } else {
       setStatusMsg(data.message || "Failed to update username.")
     }

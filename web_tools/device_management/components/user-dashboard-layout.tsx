@@ -63,6 +63,17 @@ export function UserDashboardLayout({ children }: UserDashboardLayoutProps) {
     if (cookies.username) {
       setUsername(cookies.username)
     }
+
+    // Listen for username change events
+    const handleUsernameChange = (event: CustomEvent) => {
+      setUsername(event.detail.newUsername)
+    }
+
+    window.addEventListener('usernameChanged', handleUsernameChange as EventListener)
+
+    return () => {
+      window.removeEventListener('usernameChanged', handleUsernameChange as EventListener)
+    }
   }, [])
 
   const navItems = [
