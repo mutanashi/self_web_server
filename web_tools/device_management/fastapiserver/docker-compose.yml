@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  fastapi-server:
+    build: .
+    container_name: fastapi-server
+    ports:
+      - "8001:8001"
+    environment:
+      - PORT=8001
+    restart: unless-stopped
+    networks:
+      - microservices
+
+networks:
+  microservices:
+    external: true
+    name: microservices

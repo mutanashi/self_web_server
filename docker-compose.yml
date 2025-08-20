@@ -45,7 +45,7 @@ services:
       - backend
   
   device_management:
-    image: my_device_management:latest
+    build: ./web_tools/device_management
     container_name: device_management
     expose:
       - "8000"
