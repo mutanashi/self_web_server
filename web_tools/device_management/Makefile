@@ -1,10 +1,27 @@
-# Makefile for building the Docker image
+# Makefile for building and running Docker container
 
-IMAGE_NAME := my_device_management
+IMAGE_NAME := device-management-service
+CONTAINER_NAME := device-management-service
+NETWORK := microservices
+PORT := 8000
 
-.PHONY: build
+.PHONY: build up down rebuild stop remove logs exec
 
 build:
-	docker build -t $(IMAGE_NAME) .
+	docker-compose build
 
-# test change
+up:
+	docker-compose up -d
+
+down:
+	docker-compose down || true
+	-@docker rm -f $(CONTAINER_NAME) 2>/dev/null || true
+
+rebuild: down build up
+
+logs:
+	docker-compose logs -f $(CONTAINER_NAME)
+
+exec:
+	docker exec -it $(CONTAINER_NAME) sh
+

@@ -20,6 +20,8 @@ const nextConfig = {
   basePath: '/web_tools/device_management',
   assetPrefix: '/web_tools/device_management',
   // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+  // ✅ 新增這一行來解決重導向問題
+  trailingSlash: true,
 
   webpack: (config, { dev, isServer }) => {
     if (dev && !isServer) {

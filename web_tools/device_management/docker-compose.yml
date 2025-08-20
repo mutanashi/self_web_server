@@ -2,13 +2,13 @@ version: '3.8'
 
 services:
   device-management-service:
-    image: my_device_management:latest
+    image: device-management-service:latest
     container_name: device-management-service
     ports:
       - "8000:8000"
     volumes:
-      - ./db_data:/app/db
-      - ./logs:/app/logs
+      - /root/self_web_server/web_tools/device_management/db_data:/app/db
+      - /root/self_web_server/web_tools/device_management/logs:/app/logs
     restart: unless-stopped
     networks:
       - microservices

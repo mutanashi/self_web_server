@@ -1,15 +1,15 @@
 import type { NextConfig } from "next";
 
+const base = "/web_tools/salary_tool";
+
 const nextConfig: NextConfig = {
-  output: 'export',
+  output: "export",
   trailingSlash: true,
   skipTrailingSlashRedirect: true,
-  distDir: 'out',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/web_tools/salary_tool' : '',
-  basePath: process.env.NODE_ENV === 'production' ? '/web_tools/salary_tool' : '',
-  images: {
-    unoptimized: true
-  }
+  distDir: "out",
+  basePath: base,
+  assetPrefix: base,
+  images: { unoptimized: true },
 };
 
 export default nextConfig;

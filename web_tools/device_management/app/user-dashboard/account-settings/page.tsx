@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useToast } from "@/components/ui/use-toast"
+import { basePath } from "@/app/utils/basePath"
 
 export default function UserAccountSettingsPage() {
   const { toast } = useToast()
@@ -33,7 +34,7 @@ export default function UserAccountSettingsPage() {
   const handleAccountSave = async () => {
     setStatusMsg(null)
 
-    const res = await fetch("/api/account/update-username", {
+    const res = await fetch(`${basePath}/api/account/update-username`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username }),
@@ -61,7 +62,7 @@ export default function UserAccountSettingsPage() {
       return
     }
 
-    const res = await fetch("/api/account/update-password", {
+    const res = await fetch(`${basePath}/api/account/update-password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

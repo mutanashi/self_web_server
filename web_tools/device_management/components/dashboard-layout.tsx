@@ -40,6 +40,7 @@ import {
 } from "@/components/ui/sidebar"
 import { DCMLogo } from "@/components/dcm-logo"
 import { NotificationDropdown } from "@/components/notification-dropdown"
+import { basePath } from "@/app/utils/basePath"
 
 interface DashboardLayoutProps {
   children: React.ReactNode
@@ -167,7 +168,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="sm" className="gap-2">
                     <Avatar className="h-8 w-8">
-                      <AvatarImage src="/placeholder.svg" alt="User" />
+                      <AvatarImage src={`${basePath}/placeholder.svg`} alt="User" />
                       <AvatarFallback>{username.charAt(0).toUpperCase()}</AvatarFallback>
                     </Avatar>
                     <div className="flex items-center gap-1 text-sm font-medium">

@@ -86,6 +86,7 @@ export default function Home() {
       <section className="border rounded p-4">
         <h2 className="font-medium">Quick Links</h2>
         <ul className="list-disc ml-6 space-y-1">
+          <li><Link className="text-blue-600 underline" href="/dashboard/">Dashboard</Link></li>
           <li><Link className="text-blue-600 underline" href="/employee/">Employee</Link></li>
           <li><Link className="text-blue-600 underline" href="/boss/">Boss</Link></li>
           <li><Link className="text-blue-600 underline" href="/developer/">Developer</Link></li>

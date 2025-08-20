@@ -41,6 +41,7 @@ import {
 import { DCMLogo } from "@/components/dcm-logo"
 import { Badge } from "@/components/ui/badge"
 import { NotificationDropdown } from "@/components/notification-dropdown"
+import { basePath } from "@/app/utils/basePath"
 
 interface UserDashboardLayoutProps {
   children: React.ReactNode
@@ -178,7 +179,7 @@ export function UserDashboardLayout({ children }: UserDashboardLayoutProps) {
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="sm" className="gap-2">
                     <Avatar className="h-8 w-8">
-                      <AvatarImage src="/placeholder.svg" alt="User" />
+                      <AvatarImage src={`${basePath}/placeholder.svg`} alt="User" />
                       <AvatarFallback>{username.charAt(0).toUpperCase()}</AvatarFallback>
                     </Avatar>
                     <div className="flex items-center gap-1 text-sm font-medium">
